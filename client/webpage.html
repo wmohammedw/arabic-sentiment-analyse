@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            background-color: lightblue;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function output() {
+            var url = "http://127.0.0.1:5000/get_prediction";
+            var out = document.getElementById("output");
+            var text = document.getElementById("text");
+            //alert("outside");
+            if (text.value != "") {
+                $.post(url, {
+                    text: text.value
+                }, function (data, status) {
+                    console.log(data.prediction);
+                    out.innerHTML = data.prediction.toString();
+                    //console.log(status);
+                });
+            }
+        }
+    </script>
+    <div>
+        <div>
+            <h3>Enter a Text to classify</h3>
+
+            <textarea id="text" cols="50" rows="5" style="resize:none;"></textarea>
+            <div>
+                <label id="output">output</label>
+            </div>
+            <div style="align-content: center;">
+                <button type="button" class="w3-button w3-green" onclick="output()">Classify</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

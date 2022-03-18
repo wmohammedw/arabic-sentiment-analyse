@@ -5,6 +5,8 @@ import re
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import os
+os.chdir('./server')
 
 __classes = ['positive','negative']
 __model = None
