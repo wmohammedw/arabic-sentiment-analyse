@@ -124,7 +124,8 @@ def prediction(text):
 def load_save_model():
     global __model
 
-    __model = tf.keras.models.load_model('cnn_model.h5')
+    with tf.device('/cpu:0'):
+        __model = tf.keras.models.load_model('cnn_model.h5')
 
 
 if __name__ == '__main__':
