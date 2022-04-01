@@ -2,8 +2,13 @@ from flask import Flask, request, jsonify
 import util
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
-@app.route('/get_prediction', methods=['POST'])
+
+@app.route('/')
+def index():
+    return "<h1>Welcome to our server !!</h1>"
+
+
+@app.route('/get_prediction/', methods=['POST'])
 def get_prediction():
     text = str(request.form['text'])
     response = jsonify({
