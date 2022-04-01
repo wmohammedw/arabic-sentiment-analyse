@@ -5,10 +5,12 @@ import re
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-import os
+# import os
+# os.chdir('./server')
 
 __classes = ['positive', 'negative']
 __model = None
+__tokenizer = None
 
 
 def deEmojify(text):
@@ -105,10 +107,10 @@ def stemming_processing(text):
 
 
 def prediction(text):
-
+    global __tokenizer
     try:
         with open('tokenizer.pickle', 'rb') as f:
-            tokenizer = pickle.load(f)
+            __tokenizer = pickle.load(f)
         text = deEmojify(text)
         text = cleanText(text)
         text = removeRepeatedCharacters(text)
@@ -117,13 +119,14 @@ def prediction(text):
         text = removeStopWords(text)
         text = stemming_processing(text)
 
-        test = tokenizer.texts_to_sequences([text])
+        test = __tokenizer.texts_to_sequences([text])
         test = pad_sequences(test, maxlen=528)
         y_pred = __model.predict(test)
 
         return __classes[1 if y_pred >= 0.50 else 0]
 
     except Exception as e:
+        print('Error')
         pass
 
 
@@ -133,7 +136,7 @@ def load_save_model():
     __model = tf.keras.models.load_model('cnn_model.h5')
 
 
-if __name__ == '__main__':
-    # load_save_model()
-    # print(prediction(['الشقه ممتازه','الشقه مره سيئه']))
-    pass
+# if __name__ == '__main__':
+#     # load_save_model()
+#     # print(prediction(['الشقه ممتازه','الشقه مره سيئه']))
+#     pass
