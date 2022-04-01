@@ -10,7 +10,8 @@ def index():
 
 @app.route('/get_prediction/', methods=['POST'])
 def get_prediction():
-    text = str(request.form['text'])
+    # text = str(request.form['text'])
+    text = request.form.get('text')
     response = jsonify({
         'prediction': util.prediction(text)
     })
