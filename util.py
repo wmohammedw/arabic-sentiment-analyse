@@ -9,8 +9,8 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 # os.chdir('./server')
 
 __classes = ['positive', 'negative']
-__model = None
-__tokenizer = None
+# __model = None
+# __tokenizer = None
 
 
 def deEmojify(text):
@@ -107,8 +107,8 @@ def stemming_processing(text):
 
 
 def prediction(text):
-    global __tokenizer
-    global __model
+    # global __tokenizer
+    # global __model
     try:
         __model = tf.keras.models.load_model('cnn_model.h5')
         with open('tokenizer.pickle', 'rb') as f:

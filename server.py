@@ -20,5 +20,5 @@ def get_prediction():
 
 
 if __name__ == '__main__':
-    util.load_save_model()
+    # util.load_save_model()
     app.run()
