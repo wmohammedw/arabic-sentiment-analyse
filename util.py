@@ -126,8 +126,7 @@ def prediction(text):
         return __classes[1 if y_pred >= 0.50 else 0]
 
     except Exception as e:
-        print('Error')
-        pass
+        print(e)
 
 
 def load_save_model():
