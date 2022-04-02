@@ -1,6 +1,6 @@
 import tensorflow as tf
 import pickle
-import numpy as np
+# import numpy as np
 import re
 from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer
