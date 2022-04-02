@@ -91,6 +91,13 @@ def removeStopWords(text):
         if w not in arb_stopwords_updates:
             filtered_sentence.append(w)
     t = t.join(filtered_sentence)
+
+    del arb_stopwords
+    del important_stopWords
+    del arb_stopwords_updates
+    del text
+    del filtered_sentence
+
     return t
 
 
@@ -101,6 +108,9 @@ def stemming_processing(text):
     listOfTokens = []
     for token in tokens:
         listOfTokens.append(stem.stem(token))
+
+    del tokens
+    del stem
 
     sents = sents.join(tuple(listOfTokens))
     return sents
@@ -124,6 +134,11 @@ def prediction(text):
         test = __tokenizer.texts_to_sequences([text])
         test = pad_sequences(test, maxlen=528)
         y_pred = __model.predict(test)
+
+        del text
+        del test
+        del __model
+        del __tokenizer
 
         return __classes[1 if y_pred >= 0.50 else 0]
 
