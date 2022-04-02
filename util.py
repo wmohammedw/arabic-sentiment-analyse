@@ -108,6 +108,7 @@ def stemming_processing(text):
 
 def prediction(text):
     global __tokenizer
+    global __model
     try:
         with open('tokenizer.pickle', 'rb') as f:
             __tokenizer = pickle.load(f)
@@ -131,8 +132,10 @@ def prediction(text):
 
 def load_save_model():
     global __model
-
-    __model = tf.keras.models.load_model('cnn_model.h5')
+    try:
+        __model = tf.keras.models.load_model('cnn_model.h5')
+    except Exception as e:
+        print(e)
 
 
 # if __name__ == '__main__':
